@@ -1,7 +1,9 @@
 import React from 'react'
+import CreateEmployeeForm from '../../components/CreateEmployeeForm/CreateEmployeeForm'
 import FormUserDetails from '../../components/FormUserDetail/FormUserDetails'
 import FormAddress from '../../components/FormAddress/FormAddress'
 import FormDepartment from '../../components/FormDepartment/FormDepartment'
+import { Link } from 'react-router-dom'
 import '../../App.css'
 
 const CreateEmployee = () => {
@@ -11,14 +13,9 @@ const CreateEmployee = () => {
                 <h1>HRnet</h1>
             </div>
             <div class="container">
-            <a href="employee-list.html">View Current Employees</a>
+                <Link to="/employee-list" >View Current Employees </Link>
             <h2>Create Employee</h2>
-            <form action="#" id="create-employee">
-                <FormUserDetails />
-                <FormAddress />
-                <FormDepartment />
-            </form>
-            <button onclick="saveEmployee()">Save</button>
+            <CreateEmployeeForm />
         </div>
         <div id="confirmation" class="modal">Employee Created!</div>
 
