@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../../asset/logo.png'
-import { AppBar, Container, Box, Toolbar, createTheme, ThemeProvider, Typography, Stack } from '@mui/material'
+import { AppBar, Container, Toolbar, createTheme, ThemeProvider, Typography, Stack } from '@mui/material'
 const Header = () => {
     const theme = createTheme({
         palette: {
@@ -25,13 +25,11 @@ const Header = () => {
                 <Container maxWidth="xl" height="100px" >
                     <Toolbar>
                         <img src={Logo} alt="logo" className='logo' />
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1, marginLeft: "20px" }}>
+                        <Typography variant="h4" component="div" sx={{ flexGrow: 1, marginLeft: "20px" }}>
                             HRnet
                         </Typography>
-
                         <Stack direction="row" spacing={2}>
                             <Typography>Create Employee</Typography>
-
                         </Stack>
                     </Toolbar>
                 </Container>
