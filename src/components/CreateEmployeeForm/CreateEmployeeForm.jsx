@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Link } from 'react-router-dom'
-
-import { Box, TextField, MenuItem, Container, Grid, Paper, Typography, Button, Stack, Divider } from '@mui/material';
+import {  TextField, MenuItem, Container, Grid, Button, Stack } from '@mui/material';
 import { statesList } from '../StateList/StateList';
-import{useSelector, useDispatch} from  'react-redux'
+import { useDispatch } from 'react-redux'
 import { addEmployee } from '../../features/employeeSlice/employeeSlice';
+import Modal from '../Modal/Modal';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const CreateEmployeeForm = () => {
 
@@ -12,83 +15,84 @@ const CreateEmployeeForm = () => {
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
-    const [birthDate, setBirthDate] = useState("")
-    const [startDate, setStartDate] = useState("")
+    const [birthDate, setBirthDate] = useState(null)
+    const [startDate, setStartDate] = useState(null)
     const [street, setStreet] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [zipCode, setZipCode] = useState("")
     const [department, setDepartment] = useState("")
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const dispatch = useDispatch()
 
-    const saveEmployee = () => {
-        console.log("firstname", firstName)
-        console.log("lastName", lastName)
-        console.log("birthDate", birthDate)
-        console.log("startDate", startDate)
-        console.log("street", street)
-        console.log("city", city)
-        console.log("state", state)
-        console.log("zipCode", zipCode)
-        console.log("department", department)
-            const newEmployee = {
-                firstName : firstName, 
-                lastName : lastName, 
-                birthDate : birthDate, 
-                startDate : startDate, 
-                street : street, 
-                city: city, 
-                state : state, 
-                zipCode : zipCode, 
-                department :department
-            }
-            console.log("newemployee" , newEmployee)
-
-            alert(newEmployee.firstName )
-            alert(newEmployee.lastName)
-
-//            window.localStorage.setItem("twest", newEmployee)
-            dispatch(addEmployee(newEmployee))
-
-        
+    const newEmployee = {
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: birthDate,
+        startDate: startDate,
+        street: street,
+        city: city,
+        state: state,
+        zipCode: zipCode,
+        department: department
     }
-
-
-
+console.log(birthDate)
+    const saveEmployee = (e) => {
+        e.preventDefault()
+        dispatch(addEmployee(newEmployee))
+        setIsModalOpen(true)
+        clearEmployeeForm()
+    }
+const handelBirthDate=(value)=>{
+    console.log("value" , value)
+    if(value!== null) {
+        const newDate = new Date(value._d)
+        let date = newDate.toDateString()
+        console.log("value2#",value._d)
+        console.log("newadate", date)
+        setBirthDate(date)
+    }
+}
+    const handelStartDate=(value)=>{
+        console.log("value" , value)
+        if(value!== null) {
+            const newDate = new Date(value._d)
+            let date = newDate.toDateString()
+            console.log("value2#",value._d)
+            console.log("newadate", date)
+            setStartDate(date)
+        }
+}
     const clearEmployeeForm = () => {
-        console.log("hello")
         setFirstName("")
         setLastName("")
-        setBirthDate("")
-        setStartDate("")
+        setBirthDate(null)
+        setStartDate(null)
         setStreet("")
         setCity("")
         setState("")
         setZipCode("")
         setDepartment("")
     }
-    const test =(e)=>{
-        console.log(e.target.value)
-        setFirstName(e.target.value)
-        console.log("firstName", firstName)
-    }
-    return (
-        <>
-            <form onSubmit={saveEmployee}>
 
+    return (
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+        <>
+
+            <form onSubmit={saveEmployee}>
                 <Container>
                     <h3 style={{ color: "green", marginTop: "5rem" }}>Personal information</h3>
-                    <Grid container spacing={4} style={{marginBottom : "1.5em"}}>
+                    <Grid container spacing={4} style={{ marginBottom: "1.5em" }}>
                         <Grid item xs={6}>
                             <TextField
                                 fullWidth
                                 required
                                 label="Firstname"
                                 value={firstName}
-//                                onChange={(e) => setFirstName(e.target.value)}
-        onChange={test}
-/>
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
@@ -100,30 +104,23 @@ const CreateEmployeeForm = () => {
                             />
                         </Grid>
                     </Grid>
-                    
-                        <Grid container spacing={4} style={{marginBottom : "2em"}} >
-                            <Grid item xs={4}>
-                                <TextField
-                                    fullWidth
-                                    required
-                                    label="Date of birth"
-                                    value={birthDate}
-                                    onChange={(e) => setBirthDate(e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    fullWidth
-                                    required
-                                    label="Start Date"
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}
-                                />
-                            </Grid>
-                        </Grid>
-                    
+                            <DatePicker
+                            label="Date of birth"
+                            value={birthDate}
+                            onChange={handelBirthDate}
+                            renderInput={(params) => <TextField {...params} />}
+                            >
+                            </DatePicker>
+                            <DatePicker
+                            label="Start Date"
+                            value={startDate}
+                            onChange={handelStartDate}
+                            renderInput={(params) => <TextField {...params} />}
+                            >
+                            </DatePicker>
+
                     <h3 style={{ color: "green" }}>Address</h3>
-                    <Grid container spacing={2} style={{marginBottom:"1.5rem"}}>
+                    <Grid container spacing={2} style={{ marginBottom: "1.5rem" }}>
                         <Grid item xs={3}>
                             <TextField
                                 required
@@ -187,8 +184,9 @@ const CreateEmployeeForm = () => {
                         </Grid>
                     </Grid>
 
-                    <Stack spacing={2} direction="row" style={{ marginTop: "3rem" , marginBottom:"1.5rem"
-                 }}>
+                    <Stack spacing={2} direction="row" style={{
+                        marginTop: "3rem", marginBottom: "1.5rem"
+                    }}>
                         <Button
                             type="submit"
                             variant="contained">Save</Button>
@@ -196,13 +194,21 @@ const CreateEmployeeForm = () => {
                             onClick={clearEmployeeForm}
                             variant="contained"
                             color='primary'
-                            >Cancel</Button>
+                        >Cancel</Button>
                     </Stack>
-
                     <Link to="/employee-list" >View Current Employees </Link>
                 </Container>
             </form>
+            {isModalOpen ?
+                <Modal
+                    content="Create employee successfully"
+                    show={isModalOpen}
+                    onClose={() => { setIsModalOpen(false) }}
+                />
+                : ""
+            }
         </>
+        </LocalizationProvider>
     )
 }
 

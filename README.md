@@ -1,3 +1,15 @@
+
+package
+Mui
+-data-picker
+-installation
+
+    //  `mui/datepicker`
+    // Install component (community version)
+// npm install @mui/x-date-pickers
+// Install date library (if not already installed)
+// npm install moment
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,8 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { addEmployee } from '../features/employeeSlice/employeeSlice'
+import employeeReducers from '../features/employeeSlice/employeeSlice'
 
-export const store = configureStore({
+
+/**
+ * @description : Setup Store for redux-toolkit
+ */
+
+const store = configureStore({
   reducer: {
-    employee :addEmployee
+    employees : employeeReducers
   },
 })
+
+export default store

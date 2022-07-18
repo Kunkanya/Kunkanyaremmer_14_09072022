@@ -1,23 +1,21 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-  employee : []
+  employeeLists : [],
+  value: 0
 }
 
 export const employeeSlice = createSlice({
-    name: 'employee',
+    name: 'employees',
     initialState : initialState,
     reducers :{
         addEmployee:(state, action) => {
-            alert(action.payload)
-            state.employee.push(action.payload)
-            alert("OK")
-        
-        }
-    }
+            state.employeeLists.push(action.payload)
+            }
+     }
 
 })
 
-export const {addEmployee} = employeeSlice.actions
+export const { addEmployee , test } = employeeSlice.actions
 
 export default employeeSlice.reducer
