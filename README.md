@@ -9,6 +9,9 @@ Mui
 // npm install @mui/x-date-pickers
 // Install date library (if not already installed)
 // npm install moment
+MUI x-data-grid
+-npm install @mui/x-data-grid
+
 
 # Getting Started with Create React App
 
