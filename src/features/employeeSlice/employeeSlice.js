@@ -2,7 +2,6 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
   employeeLists : [],
-  value: 0
 }
 
 export const employeeSlice = createSlice({

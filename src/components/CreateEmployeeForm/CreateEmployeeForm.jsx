@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { nanoid } from '@reduxjs/toolkit';
 import { TextField, MenuItem, Container, Grid, Button, Stack } from '@mui/material';
 import { statesList } from '../StateList/StateList';
 import { useDispatch } from 'react-redux'
@@ -9,6 +10,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment';
+
 
 const CreateEmployeeForm = () => {
 
@@ -28,7 +30,11 @@ const CreateEmployeeForm = () => {
 
     const dispatch = useDispatch()
 
+    console.log(nanoid())
+
     const newEmployee = {
+     //use nanoid to create id 
+        id: nanoid(),
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,
@@ -48,15 +54,16 @@ const CreateEmployeeForm = () => {
     const handelBirthDate = (value) => {
         if (value !== null) {
             const newDate = new Date(value._d)
-            let birthDate = moment(newDate , moment.ISO_8601).format('DD/MM/YYYY') 
+            let birthDate = moment(newDate , moment.ISO_8601).format('MMM/DD/YYYY') 
             console.log("testDate",birthDate)
             setBirthDate(birthDate)
         }
     }
+    
     const handelStartDate = (value) => {
         if (value !== null) {
             const newDate = new Date(value._d)
-            let startDate = moment(newDate , moment.ISO_8601).format('DD/MM/YYYY') 
+            let startDate = moment(newDate , moment.ISO_8601).format('MMM/DD/YYYY') 
             console.log("testDate",startDate)
             setStartDate(startDate)
         }

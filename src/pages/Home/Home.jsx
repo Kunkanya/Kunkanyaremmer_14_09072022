@@ -6,7 +6,7 @@ import Header from '../../components/Header/Header'
 const CreateEmployee = () => {
     return (
         <>
-            <Header />
+            <Header text="Create Employee"/>
             <CreateEmployeeForm />
         </>
     )

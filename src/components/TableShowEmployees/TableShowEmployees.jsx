@@ -1,74 +1,115 @@
-//import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { mockDataEmployees } from '../../asset/data'
 import { DataGrid } from '@mui/x-data-grid';
+import Box from '@mui/material/Box'
 
-const TableShowEmployees = () => {
-const columns=[
-    { field: 'firstName', headerName: 'First name', width: 130 ,      sortable: true},
-    { field: 'lastName', headerName: 'Last name', width: 130 ,      sortable: true},
-    { field: 'startDate', headerName: 'Start Date', width: 130 ,      sortable: true},
-    { field: 'department', headerName: 'Department', width: 130 ,      sortable: true},
-    { field: 'birthDate', headerName: 'Date of Birth', width: 130 ,      sortable: true},
-    { field: 'street', headerName: 'Street', width: 130 ,      sortable: true},
-    { field: 'city', headerName: 'City', width: 130 ,      sortable: true},
-    { field: 'state', headerName: 'State', width: 130 ,      sortable: true},
-    { field: 'zipCode', headerName: 'Zip Code', width: 130 ,      sortable: true},
-];
-  
+const TableShowEmployees = (data) => {
+
+    const [pageSize, setPageSize] = useState(5)
+    const columns = [
+        {
+            field: 'firstName',
+            headerName: 'First name',
+            headerClassName: "table--header",
+            headerAlign: "left", width: 130,
+            sortable: true
+        },
+        {
+            field: 'lastName',
+            headerName: 'Last name',
+            headerClassName: "table--header",
+            headerAlign: "left",
+            width: 130,
+            sortable: true
+        },
+        {
+            field: 'startDate',
+            headerName: 'Start Date',
+            headerClassName: "table--header",
+            headerAlign: "left",
+            width: 100,
+            sortable: true
+        },
+        {
+            field: 'department',
+            headerName: 'Department',
+            headerClassName: "table--header",
+            headerAlign: "center",
+            width: 210,
+            sortable: true
+        },
+        {
+            field: 'birthDate',
+            headerName: 'Date of Birth',
+            headerClassName: "table--header",
+            headerAlign: "left",
+            width: 100,
+            sortable: true
+        },
+        {
+            field: 'street',
+            headerName: 'Street',
+            headerClassName: "table--header",
+            headerAlign: "center",
+            width: 220,
+            sortable: true
+        },
+        {
+            field: 'city',
+            headerName: 'City',
+            headerClassName: "table--header",
+            headerAlign: "center",
+            width: 130,
+            sortable: true
+        },
+        {
+            field: 'state',
+            headerName: 'State',
+            headerClassName: "table--header",
+            headerAlign: "center",
+            width: 120,
+            sortable: true
+        },
+        {
+            field: 'zipCode',
+            headerName: 'Zip Code',
+            headerClassName: "table--header",
+            width: 130,
+            sortable: true
+        },
+    ];
+
+    const rowsData = data.data
+    console.log("==rawsdata", rowsData)
     return (
-        <div style={{ height: 600, width: '100%' }}>
-        <DataGrid
-            getRowId={mockDataEmployees.id}
-            rows={mockDataEmployees}
-            columns={columns}
+        <Box sx={{
+            height: 600,
+            width: '100%',
+            '& .table--header': {
+                backgroundColor: 'rgba(109, 133,12, 0.2)',
+            }
+        }}>
+            <DataGrid
+                getRowId={rowsData.id}
+                rows={rowsData}
+                columns={columns}
+                pageSize={pageSize}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                pagination
+                sx={{
+                    m: 2,
+                    boxShadow: 2,
+                    borderColor: 'rgba(109, 133,12, 0.2)',
+                    '& .MuiDataGrid-cell:hover': {
+                        color: 'rgba(109, 133,12)',
+                    }
+                }}
             >
-        </DataGrid>
-        </div>
+            </DataGrid>
+        </Box>
     )
 }
 
 export default TableShowEmployees
 
-/**
- *         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead style={{backgroundColor:"green" , fontColor:"white"} }
->
-                    <TableRow style={{backgroundColor:"green" , fontColor:"white"}}>
-                        <TableCell align="left">First Name</TableCell>
-                        <TableCell align="left">Last Name</TableCell>
-                        <TableCell align="right">Start Date</TableCell>
-                        <TableCell align="right">Department</TableCell>
-                        <TableCell align="right">Date of Birth</TableCell>
-                        <TableCell align="right">Street</TableCell>
-                        <TableCell align="right">City</TableCell>
-                        <TableCell align="right">State</TableCell>
-                        <TableCell align="right">Zip Code</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {mockDataEmployees.map((employee) => (
-                        <TableRow
-                            key={Math.floor(Math.random() * 100)}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">{employee.firstName}</TableCell>
-                            <TableCell align="left">{employee.lastName}</TableCell>
-                            <TableCell align="left">{employee.startDate}</TableCell>
-                            <TableCell align="right">{employee.department}</TableCell>
-                            <TableCell align="right">{employee.birthDate}</TableCell>
-                            <TableCell align="right">{employee.street}</TableCell>
-                            <TableCell align="right">{employee.city}</TableCell>
-                            <TableCell align="right">{employee.state}</TableCell>
-                            <TableCell align="right">{employee.zipCode}</TableCell>
-
-                        </TableRow>
-
-                    ))}
-                </TableBody>
-
-            </Table>
-        </TableContainer>
-
- */

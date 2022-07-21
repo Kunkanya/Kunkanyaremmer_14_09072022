@@ -33,7 +33,8 @@ const Modal = ({ show, content, onClose }) => {
 Modal.propTypes = {
 
     content: PropTypes.string , 
-    show: PropTypes.bool.isRequired
+    show: PropTypes.bool.isRequired,
+    onClose : PropTypes.func.isRequired
 }
 
 export default Modal

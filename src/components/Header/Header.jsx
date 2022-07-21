@@ -1,7 +1,8 @@
 import React from 'react'
 import Logo from '../../asset/logo.png'
 import { AppBar, Container, Toolbar, createTheme, ThemeProvider, Typography, Stack } from '@mui/material'
-const Header = () => {
+
+const Header = (text) => {
     const theme = createTheme({
         palette: {
             primary: {
@@ -29,7 +30,9 @@ const Header = () => {
                             HRnet
                         </Typography>
                         <Stack direction="row" spacing={2}>
-                            <Typography>Create Employee</Typography>
+                            <Typography
+                            variant="h4"
+                            >{text.text}</Typography>
                         </Stack>
                     </Toolbar>
                 </Container>
