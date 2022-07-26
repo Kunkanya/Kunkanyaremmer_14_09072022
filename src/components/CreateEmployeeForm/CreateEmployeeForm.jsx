@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
-import { TextField, MenuItem, Container, Grid, Button, Stack } from '@mui/material';
-import { statesList } from '../StateList/StateList';
+import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
+import MenuItem from '@mui/material/MenuItem';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Stack  from '@mui/material/Stack';
+import { statesList } from '../../asset/StateList';
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../../features/employeeSlice/employeeSlice';
-import Modal from '../Modal/Modal';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment';
 
-
+//import Modal from 'kunkanya-modal-library-react';
+const Modal = React.lazy(() => import('kunkanya-modal-library-react'))
 const CreateEmployeeForm = () => {
 
     const departmentList = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]
@@ -29,8 +34,6 @@ const CreateEmployeeForm = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const dispatch = useDispatch()
-
-    console.log(nanoid())
 
     const newEmployee = {
      //use nanoid to create id 
@@ -173,7 +176,7 @@ const CreateEmployeeForm = () => {
                                     fullWidth
                                     required
                                     select
-                                    id="outlined-select"
+                                    id="outlined-select-department"
                                     label="Department"
                                     value={department}
                                     onChange={(e) => setDepartment(e.target.value)}
@@ -200,14 +203,21 @@ const CreateEmployeeForm = () => {
                         <Link to="/employee-list" >View Current Employees </Link>
                     </Container>
                 </form>
-                {isModalOpen ?
-                    <Modal
-                        content="Create employee successfully"
-                        show={isModalOpen}
-                        onClose={() => { setIsModalOpen(false) }}
-                    />
-                    : ""
-                }
+                {isModalOpen ? 
+<React.Suspense fallback='Loading'>
+
+<Modal
+                 show={isModalOpen}
+                 onCloseFunction={() => { setIsModalOpen(false) }}
+                 modalHeaderContent={"HRNet"}
+                 modalBodyContent="Succesfully created new employee!!!" 
+                 buttonContent="Close"
+                 buttonOnclickFn={()=>{ setIsModalOpen(false)}}
+                 />
+
+</React.Suspense>
+
+                : ""}
             </>
         </LocalizationProvider>
     )

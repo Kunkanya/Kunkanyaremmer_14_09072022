@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { mockDataEmployees } from '../../asset/data'
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box'
 
@@ -80,7 +79,7 @@ const TableShowEmployees = (data) => {
     ];
 
     const rowsData = data.data
-    console.log("==rawsdata", rowsData)
+
     return (
         <Box sx={{
             height: 600,
@@ -94,6 +93,8 @@ const TableShowEmployees = (data) => {
                 rows={rowsData}
                 columns={columns}
                 pageSize={pageSize}
+                autoHeight ={true}
+            
                 onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
                 pagination

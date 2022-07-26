@@ -1,7 +1,8 @@
 import React from 'react'
 import Logo from '../../asset/logo.png'
-import { AppBar, Container, Toolbar, createTheme, ThemeProvider, Typography, Stack } from '@mui/material'
+import { AppBar, Container, Toolbar, createTheme, ThemeProvider, Typography, Stack, Box } from '@mui/material'
 
+//const Logo = React.lazy(()=> import('../../asset/logo.png'))
 const Header = (text) => {
     const theme = createTheme({
         palette: {
@@ -10,14 +11,8 @@ const Header = (text) => {
                 main: '#6D850C',
                 dark: '#586D04',
                 contrastText: '#fff',
-            },
-            secondary: {
-                light: '#ff7961',
-                main: '#f44336',
-                dark: '#ba000d',
-                contrastText: '#000',
-            },
-        }
+            }
+                }
     })
 
     return (
@@ -25,13 +20,15 @@ const Header = (text) => {
             <AppBar position="static" >
                 <Container maxWidth="xl" height="100px" >
                     <Toolbar>
+                        <Box width={80} height={80} margin='auto' display='flex' justifyContent='center' alignItems='center'>
                         <img src={Logo} alt="logo" className='logo' />
-                        <Typography variant="h4" component="div" sx={{ flexGrow: 1, marginLeft: "20px" }}>
+                        </Box>
+                        <Typography variant="h5" component="h5" sx={{ flexGrow: 1, marginLeft: "20px" }}>
                             HRnet
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Typography
-                            variant="h4"
+                            variant="h5"
                             >{text.text}</Typography>
                         </Stack>
                     </Toolbar>
