@@ -13,10 +13,10 @@ import { addEmployee } from '../../features/employeeSlice/employeeSlice';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import moment from 'moment';
 
-//import Modal from 'kunkanya-modal-library-react';
+//using react lazy to reduce bundel.js size.
 const Modal = React.lazy(() => import('kunkanya-modal-library-react'))
+
 const CreateEmployeeForm = () => {
 
     const departmentList = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]
@@ -56,19 +56,13 @@ const CreateEmployeeForm = () => {
     }
     const handelBirthDate = (value) => {
         if (value !== null) {
-            const newDate = new Date(value._d)
-            let birthDate = moment(newDate , moment.ISO_8601).format('MMM/DD/YYYY') 
-            console.log("testDate",birthDate)
-            setBirthDate(birthDate)
+            setBirthDate(value.format('YYYY-MM-DD'))
         }
     }
     
     const handelStartDate = (value) => {
         if (value !== null) {
-            const newDate = new Date(value._d)
-            let startDate = moment(newDate , moment.ISO_8601).format('MMM/DD/YYYY') 
-            console.log("testDate",startDate)
-            setStartDate(startDate)
+            setStartDate(value.format('YYYY-MM-DD'))
         }
     }
     const clearEmployeeForm = () => {
