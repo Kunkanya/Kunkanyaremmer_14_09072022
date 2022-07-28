@@ -1,6 +1,8 @@
 ![Create react app](https://img.shields.io/badge/build_with-create_react_app-09D3AC?style=for-the-badge&logo=Create-React-App)
 ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-![This is a defautl style modal](./src//asset//logo.png)
+
+
+![This is a defautl style modal](./src/asset/logo.png)
 
 # HRnet Project
 is a web application to manage employee informations.
