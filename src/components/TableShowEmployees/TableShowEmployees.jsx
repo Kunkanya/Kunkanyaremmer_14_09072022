@@ -10,7 +10,7 @@ const TableShowEmployees = (data) => {
             field: 'firstName',
             headerName: 'First name',
             headerClassName: "table--header",
-            headerAlign: "left", width: 130,
+            headerAlign: "left", width: 120,
             sortable: true
         },
         {
@@ -18,23 +18,7 @@ const TableShowEmployees = (data) => {
             headerName: 'Last name',
             headerClassName: "table--header",
             headerAlign: "left",
-            width: 130,
-            sortable: true
-        },
-        {
-            field: 'startDate',
-            headerName: 'Start Date',
-            headerClassName: "table--header",
-            headerAlign: "left",
-            width: 100,
-            sortable: true
-        },
-        {
-            field: 'department',
-            headerName: 'Department',
-            headerClassName: "table--header",
-            headerAlign: "center",
-            width: 210,
+            width: 120,
             sortable: true
         },
         {
@@ -42,14 +26,32 @@ const TableShowEmployees = (data) => {
             headerName: 'Date of Birth',
             headerClassName: "table--header",
             headerAlign: "left",
-            width: 100,
+            width: 120,
+            sortable: true
+        },
+
+        {
+            field: 'startDate',
+            headerName: 'Start Date',
+            headerClassName: "table--header",
+            headerAlign: "left",
+            width: 120,
+            sortable: true
+        },
+
+        {
+            field: 'department',
+            headerName: 'Department',
+            headerClassName: "table--header",
+            headerAlign: "left",
+            width: 240,
             sortable: true
         },
         {
             field: 'street',
             headerName: 'Street',
             headerClassName: "table--header",
-            headerAlign: "center",
+            headerAlign: "left",
             width: 220,
             sortable: true
         },
@@ -57,16 +59,16 @@ const TableShowEmployees = (data) => {
             field: 'city',
             headerName: 'City',
             headerClassName: "table--header",
-            headerAlign: "center",
-            width: 130,
+            headerAlign: "left",
+            width: 150,
             sortable: true
         },
         {
             field: 'state',
             headerName: 'State',
             headerClassName: "table--header",
-            headerAlign: "center",
-            width: 120,
+            headerAlign: "left",
+            width: 201,
             sortable: true
         },
         {
@@ -81,20 +83,22 @@ const TableShowEmployees = (data) => {
     const rowsData = data.data
 
     return (
-        <Box sx={{
-            height: 600,
-            width: '100%',
-            '& .table--header': {
-                backgroundColor: 'rgba(109, 133,12, 0.2)',
-            }
-        }}>
+        <Box
+            m={2}
+            p={1}
+            sx={{
+                height: "fit-content",
+                '& .table--header': {
+                    backgroundColor: 'rgba(109, 133,12, 0.2)',
+                }
+            }}>
             <DataGrid
                 getRowId={rowsData.id}
                 rows={rowsData}
                 columns={columns}
                 pageSize={pageSize}
-                autoHeight ={true}
-            
+                autoHeight={true}
+
                 onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
                 pagination

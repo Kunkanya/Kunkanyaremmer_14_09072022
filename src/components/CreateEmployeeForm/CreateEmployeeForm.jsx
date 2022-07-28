@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Stack  from '@mui/material/Stack';
+import Stack from '@mui/material/Stack';
 import { statesList } from '../../asset/StateList';
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../../features/employeeSlice/employeeSlice';
@@ -36,7 +36,7 @@ const CreateEmployeeForm = () => {
     const dispatch = useDispatch()
 
     const newEmployee = {
-     //use nanoid to create id 
+        //use nanoid to create id 
         id: nanoid(),
         firstName: firstName,
         lastName: lastName,
@@ -59,7 +59,7 @@ const CreateEmployeeForm = () => {
             setBirthDate(value.format('YYYY-MM-DD'))
         }
     }
-    
+
     const handelStartDate = (value) => {
         if (value !== null) {
             setStartDate(value.format('YYYY-MM-DD'))
@@ -82,136 +82,178 @@ const CreateEmployeeForm = () => {
             <>
                 <form onSubmit={saveEmployee}>
                     <Container>
-                        <h3 style={{ color: "green", marginTop: "5rem" }}>Personal information</h3>
-                        <Grid container spacing={4} style={{ marginBottom: "1.5em" }}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    required
-                                    label="Firstname"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                />
+                        <Grid container paddingTop={2}>
+                            <Grid item xs={12} sm={12} md={6} lg={6}>
+                                <Grid container padding={1} direction="row"  >
+                                    <Grid item sm={12} md={12} lg={12} padding={1}>
+                                        <h3 style={{ color: "green" }}>Personal information</h3>
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <TextField
+                                            fullWidth
+                                            required
+                                            label="Firstname"
+                                            value={firstName}
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                        />
+
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <TextField
+                                            fullWidth
+                                            required
+                                            label="Lastname"
+                                            value={lastName}
+                                            onChange={(e) => setLastName(e.target.value)}
+                                        />
+
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <DatePicker
+                                            fullWidth
+
+                                            label="Date of birth"
+                                            value={birthDate}
+                                            onChange={handelBirthDate}
+                                            renderInput={(params) => <TextField {...params} />}
+                                        >
+                                        </DatePicker>
+
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <DatePicker
+                                            fullWidth
+                                            label="Start Date"
+                                            value={startDate}
+                                            onChange={handelStartDate}
+                                            renderInput={(params) => <TextField {...params} />}
+                                        >
+                                        </DatePicker>
+
+                                    </Grid>
+
+                                </Grid>
+
                             </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    required
-                                    label="Lastname"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                />
+                            <Grid item xs={12} sm={12} md={6} lg={6}>
+                                <Grid container padding={1} direction="row" >
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <h3 style={{ color: "green" }}>Address</h3>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <TextField
+                                            fullWidth
+                                            required
+                                            label="Street"
+                                            value={street}
+                                            onChange={(e) => setStreet(e.target.value)}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <TextField
+                                            fullWidth
+                                            required
+                                            label="City"
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
+                                        />
+
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <TextField
+                                            required
+                                            select
+                                            fullWidth
+                                            id="outlined-select"
+                                            label="States"
+                                            value={state}
+                                            onChange={(e) => setState(e.target.value)}
+                                        >
+                                            {statesList.map((state) => (
+                                                <MenuItem key={state.abbreviation} value={state.name}>
+                                                    {state.name}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                        <TextField
+                                            fullWidth
+                                            required
+                                            id="outlined-required"
+                                            label="Zip code"
+                                            variant='outlined'
+                                            value={zipCode}
+                                            onChange={(e) => setZipCode(e.target.value)}
+                                        />
+
+                                    </Grid>
+
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <DatePicker
-                            label="Date of birth"
-                            value={birthDate}
-                            onChange={handelBirthDate}
-                            renderInput={(params) => <TextField {...params} />}
-                        >
-                        </DatePicker>
-                        <DatePicker
-                            label="Start Date"
-                            value={startDate}
-                            onChange={handelStartDate}
-                            renderInput={(params) => <TextField {...params} />}
-                        >
-                        </DatePicker>
-                        <h3 style={{ color: "green" }}>Address</h3>
-                        <Grid container spacing={2} style={{ marginBottom: "1.5rem" }}>
-                            <Grid item xs={3}>
-                                <TextField
-                                    required
-                                    label="Street"
-                                    value={street}
-                                    onChange={(e) => setStreet(e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    required
-                                    label="City"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    required
-                                    select
-                                    fullWidth
-                                    id="outlined-select"
-                                    label="States"
-                                    value={state}
-                                    onChange={(e) => setState(e.target.value)}
-                                >
-                                    {statesList.map((state) => (
-                                        <MenuItem key={state.abbreviation} value={state.name}>
-                                            {state.name}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    required
-                                    id="outlined-required"
-                                    label="Zip code"
-                                    variant='outlined'
-                                    value={zipCode}
-                                    onChange={(e) => setZipCode(e.target.value)}
-                                />
-                            </Grid>
-                        </Grid>
-                        <h3 style={{ color: "green" }}>Department</h3>
-                        <Grid container >
-                            <Grid item xs={6}>
-                                <TextField
-                                    fullWidth
-                                    required
-                                    select
-                                    id="outlined-select-department"
-                                    label="Department"
-                                    value={department}
-                                    onChange={(e) => setDepartment(e.target.value)}
-                                >
-                                    {departmentList.map((department, index) => (
-                                        <MenuItem key={index} value={department}>{department}</MenuItem>
-                                    ))}
-                                </TextField>
+
+
+
+                            <Grid container padding={1} direction="row" >
+                                <Grid item xs={12} sm={12} md={12} lg={12} padding={1} >
+                                    <h3 style={{ color: "green" }}>Department</h3>
+                                </Grid>
+
+                                <Grid item xs={12} sm={12} md={12} lg={12} padding={1}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        select
+                                        id="outlined-select-department"
+                                        label="Department"
+                                        value={department}
+                                        onChange={(e) => setDepartment(e.target.value)}
+                                    >
+                                        {departmentList.map((department, index) => (
+                                            <MenuItem key={index} value={department}>{department}</MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
                             </Grid>
                         </Grid>
 
-                        <Stack spacing={2} direction="row" style={{
-                            marginTop: "3rem", marginBottom: "1.5rem"
+                        <Stack spacing={2} direction="row" justifyContent="center" style={{
+                            marginTop: "1em", marginBottom: "1.5rem"
                         }}>
                             <Button
                                 type="submit"
-                                variant="contained">Save</Button>
+                                variant="contained">
+                                    Save
+                            </Button>
                             <Button
                                 onClick={clearEmployeeForm}
-                                variant="contained"
-                                color='primary'
-                            >Cancel</Button>
+                                variant="outlined"
+                                color='primary'>
+                                    Cancel
+                            </Button>
                         </Stack>
                         <Link to="/employee-list" >View Current Employees </Link>
+
                     </Container>
                 </form>
-                {isModalOpen ? 
-<React.Suspense fallback='Loading'>
 
-<Modal
-                 show={isModalOpen}
-                 onCloseFunction={() => { setIsModalOpen(false) }}
-                 modalHeaderContent={"HRNet"}
-                 modalBodyContent="Succesfully created new employee!!!" 
-                 buttonContent="Close"
-                 buttonOnclickFn={()=>{ setIsModalOpen(false)}}
-                 />
 
-</React.Suspense>
+                {isModalOpen ?
+                    <React.Suspense fallback='Loading'>
 
-                : ""}
+                        <Modal
+                            show={isModalOpen}
+                            onCloseFunction={() => { setIsModalOpen(false) }}
+                            modalHeaderContent={"HRNet"}
+                            modalBodyContent="Succesfully created new employee!!!"
+                            buttonContent="Close"
+                            buttonOnclickFn={() => { setIsModalOpen(false) }}
+                        />
+
+                    </React.Suspense>
+
+                    : ""}
             </>
         </LocalizationProvider>
     )

@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import CreateEmployeeForm from '../../components/CreateEmployeeForm/CreateEmployeeForm'
 import '../../App.css'
-import Header from '../../components/Header/Header'
-//import Header2 from '../../components/Header2/Header2'
+const Header = lazy(() => import('../../components/Header/Header'))
+
 const CreateEmployee = () => {
-//    
+
+
+      
     return (
         <>
-            <Header text="Create Employee"/>
+            <Suspense fallback="Loading ...">
+                <Header text="Create Employee" />
+            </Suspense>
+
             <CreateEmployeeForm />
         </>
     )
