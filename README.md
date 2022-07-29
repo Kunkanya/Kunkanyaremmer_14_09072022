@@ -2,10 +2,8 @@
 ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
 
-![This is a defautl style modal](./src/asset/logo.png)
-
-# HRnet Project
-is a web application to manage employee informations.
+# <img src="./src/asset/logo.png" width="60" height="60" alt="logo"> HRnet 
+HRnet Project is a web application to manage employee informations.
 
 ## Table of contents #
 1. [General information](#general)
